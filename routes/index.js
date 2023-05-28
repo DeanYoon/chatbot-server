@@ -12,7 +12,12 @@ const MONGODB_URL = process.env.MONGODB_URL;
 
 router.use(
   cors({
-    origin: ["http://127.0.0.1:3000", "http://localhost:3000"],
+    origin: [
+      "http://127.0.0.1:3000",
+      "http://localhost:3000",
+      "https://open-ai-vercel-dsr8ila3e-deanyoon.vercel.app",
+      "https://open-ai-vercel-git-main-deanyoon.vercel.app",
+    ],
     methods: ["GET", "PUT", "POST", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization", "x-auth-token"],
     credentials: true,
