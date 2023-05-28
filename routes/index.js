@@ -17,6 +17,8 @@ router.use(
       "http://localhost:3000",
       "https://open-ai-vercel-dsr8ila3e-deanyoon.vercel.app",
       "https://open-ai-vercel-git-main-deanyoon.vercel.app",
+      "https://open-ai-vercel.vercel.app/",
+      "https://open-ai-vercel-deanyoon.vercel.app/",
     ],
     methods: ["GET", "PUT", "POST", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization", "x-auth-token"],
