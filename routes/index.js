@@ -8,6 +8,11 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 require("dotenv").config();
 
+const OpenAI = require("openai");
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
+});
+
 const MONGODB_URL = process.env.MONGODB_URL;
 
 router.use(
@@ -25,6 +30,19 @@ router.use(
     credentials: true,
   })
 );
+router.post("/chat", async (req, res) => {
+  const { data, category } = req.body;
+
+  const response = await openai.chat.completions.create({
+    messages: [
+      { role: "system", content: category },
+      { role: "user", content: data },
+    ],
+    model: "gpt-3.5-turbo",
+  });
+
+  res.send(response.choices[0].message.content);
+});
 
 router.post("/users/:username", async (req, res) => {
   const username = req.params.username;
@@ -47,6 +65,7 @@ router.get("/users/:username", async (req, res) => {
   const username = req.params.username;
   try {
     const user = await User.findById({ username });
+    // const user = await User.find
     console.log(user);
     res.send(user);
   } catch (err) {
